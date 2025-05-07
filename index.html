@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -84,32 +83,69 @@
             width: 180px;
             height: 180px;
             margin: 0 auto 20px;
-            border-radius: 50%;
-            border: 5px solid rgba(255,255,255,0.3);
-            padding: 5px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: var(--transition);
+            perspective: 1000px;
             position: relative;
-            overflow: hidden;
         }
         
-        .resume-photo {
+        .photo-carousel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCarousel 18s infinite linear;
+            transition: transform 1s;
+        }
+        
+        .photo-carousel:hover {
+            animation-play-state: paused;
+        }
+        
+        .photo-item {
+            position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid rgba(255,255,255,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            transition: all 0.5s ease;
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             display: block;
-            transition: var(--transition);
         }
         
-        .resume-photo-container:hover {
-            transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        /* 初始位置设置 */
+        .photo-item:nth-child(1) {
+            transform: rotateY(0deg) translateZ(300px);
         }
         
-        .resume-photo-container:hover .resume-photo {
-            transform: scale(0.95);
+        .photo-item:nth-child(2) {
+            transform: rotateY(120deg) translateZ(300px);
+        }
+        
+        .photo-item:nth-child(3) {
+            transform: rotateY(240deg) translateZ(300px);
+        }
+        
+        /* 3D旋转动画 */
+        @keyframes rotateCarousel {
+            0% {
+                transform: rotateY(0deg);
+            }
+            33% {
+                transform: rotateY(-120deg);
+            }
+            66% {
+                transform: rotateY(-240deg);
+            }
+            100% {
+                transform: rotateY(-360deg);
+            }
         }
         
         .resume-body {
@@ -359,6 +395,10 @@
                 width: 150px;
                 height: 150px;
             }
+            
+            .photo-item {
+                transform: translateZ(250px) !important;
+            }
         }
     </style>
 </head>
@@ -366,7 +406,17 @@
     <div class="resume-container">
         <div class="resume-header">
             <div class="resume-photo-container">
-                <img src="IMG_20230825_122506.jpg" alt="邓颖昊" class="resume-photo">
+                <div class="photo-carousel">
+                    <div class="photo-item">
+                        <img src="1.jpg" alt="邓颖昊照片1">
+                    </div>
+                    <div class="photo-item">
+                        <img src="2.jpg" alt="邓颖昊照片2">
+                    </div>
+                    <div class="photo-item">
+                        <img src="3.jpg" alt="邓颖昊照片3">
+                    </div>
+                </div>
             </div>
             <h1 class="resume-title">邓颖昊</h1>
             <p class="resume-subtitle">软件工程 | 烟台理工学院</p>
@@ -425,7 +475,7 @@
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-qq"></i></a>
-                        <a href="https://github.com/Ustinian-Aurora" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
@@ -435,6 +485,8 @@
                     <div class="skills-list">
                         <div class="skill-tag">平面设计师</div>
                         <div class="skill-tag">软件系统设计师</div>
+                        <div class="skill-tag">HTML/CSS</div>
+                        <div class="skill-tag">JavaScript</div>
                     </div>
                 </div>
                 
@@ -490,10 +542,6 @@
                             <h3 class="timeline-title">算法与数据岗</h3>
                             <p class="timeline-desc">AI算法工程师/大数据开发/网络安全</p>
                         </div>
-                    </div>
-                </div>
-          
-        
                     </div>
                 </div>
             </div>
